@@ -3,14 +3,18 @@
 // Smooth scroll para los enlaces del menú
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        if (this.parentElement.classList.contains('has-submenu')) return;
+
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        
+        const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
-            // Cerrar menú móvil si está abierto
             if (mainMenu && mainMenu.classList.contains('active')) {
                 mobileToggle.classList.remove('active');
                 mainMenu.classList.remove('active');
@@ -23,18 +27,60 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const mobileToggle = document.querySelector('.mobile-toggle');
 const mainMenu = document.querySelector('.main-menu');
 
+function cerrarMenu() {
+    mobileToggle.classList.remove('active');
+    mainMenu.classList.remove('active');
+    document.querySelectorAll('.has-submenu').forEach(item => {
+        item.classList.remove('active');
+    });
+}
+
 if (mobileToggle && mainMenu) {
-    mobileToggle.addEventListener('click', function() {
+
+    // Abrir/cerrar con botón hamburguesa
+    mobileToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
         this.classList.toggle('active');
         mainMenu.classList.toggle('active');
     });
 
-    // Cerrar menú al hacer clic en un enlace
+    // ✅ CORREGIDO: Cerrar al hacer clic en links que NO son el padre del submenú
     mainMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            mobileToggle.classList.remove('active');
-            mainMenu.classList.remove('active');
+            if (link.parentElement.classList.contains('has-submenu') &&
+                link.parentElement.querySelector('.submenu')) return;
+            cerrarMenu();
         });
+    });
+
+    // ✅ CORREGIDO: Submenú táctil en móvil - ya no interfiere con el cierre del nav
+    document.querySelectorAll('.has-submenu > a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
+                const parent = this.parentElement;
+                // Cerrar otros submenús abiertos
+                document.querySelectorAll('.has-submenu').forEach(item => {
+                    if (item !== parent) item.classList.remove('active');
+                });
+                parent.classList.toggle('active');
+            }
+        });
+    });
+
+    // ✅ Cerrar al hacer clic fuera del nav
+    document.addEventListener('click', function(event) {
+        if (!mobileToggle.contains(event.target) && !mainMenu.contains(event.target)) {
+            cerrarMenu();
+        }
+    });
+
+    // Cerrar al hacer scroll
+    window.addEventListener('scroll', function() {
+        if (mainMenu.classList.contains('active')) {
+            cerrarMenu();
+        }
     });
 }
 
@@ -70,7 +116,7 @@ const navLinks = document.querySelectorAll('.main-menu a');
 
 function updateActiveLink() {
     let current = '';
-    const scrollPosition = window.scrollY + 200; // Offset para mejor detección
+    const scrollPosition = window.scrollY + 200;
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -111,7 +157,6 @@ const animateOnScroll = () => {
     });
 };
 
-// Establecer estilos iniciales para animación
 document.querySelectorAll('.service-card, .project-card, .team-card, .safety-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -136,10 +181,9 @@ if (newsletterForm) {
     });
 }
 
-// Manejar clics en botones de WhatsApp para tracking (opcional)
+// Manejar clics en botones de WhatsApp
 document.querySelectorAll('.btn-whatsapp, .team-btn, .btn-primary[href*="wa.me"]').forEach(btn => {
     btn.addEventListener('click', function() {
         console.log('Click a WhatsApp desde:', this.textContent.trim());
-        // Aquí puedes agregar código para tracking con Google Analytics
     });
 });

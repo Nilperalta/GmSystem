@@ -75,63 +75,130 @@ body {
 
 /* ===== NAVEGACIÓN ===== */
 .main-navigation {
-    background: white;
+    background: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
+.main-navigation .container {
+    max-width: 100%;
+    padding: 0;
+}
+
+/* Contenedor interno */
 .nav-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    justify-content: space-between; 
+    padding: 15px 20px;
+}
+
+/* Logo */
+.logo {
+    /*border: 2px solid red;*/
+    padding-top: 9px;
 }
 
 .logo img {
-    max-width: 280px;
+    /*border: 2px solid pink;*/
+    max-width: 210px;
     height: auto;
 }
 
+/* Botón móvil (oculto por ahora) */
 .mobile-toggle {
+    /*border: 2px solid yellow;*/
     display: none;
     background: none;
     border: none;
     cursor: pointer;
     flex-direction: column;
     gap: 4px;
-    padding: 5px;
-    z-index: 1001;
 }
 
 .mobile-toggle span {
     width: 25px;
     height: 3px;
     background: #092179;
-    transition: 0.3s;
+}
+
+/* Menú */
+.main-menu {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    padding-right: 10%;
 }
 
 .main-menu ul {
     display: flex;
+    flex-wrap: nowrap;
     list-style: none;
     gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
+/* Links */
 .main-menu a {
     color: #092179;
     text-decoration: none;
     font-weight: 600;
-    font-size: 15px;
-    transition: color 0.3s;
-    padding: 5px 0;
+    font-size: 18px;
+    white-space: nowrap;
     position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
 }
 
 .main-menu a:hover {
     color: #e40008;
 }
 
+/* Submenú ESCRITORIO */
+.has-submenu {
+    position: relative;
+}
+
+.has-submenu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-top: 2px solid #092179;
+    flex-direction: column;
+    gap: 0;
+}
+
+.has-submenu:hover .submenu {
+    display: flex;
+}
+
+.has-submenu .submenu li a {
+    display: block;
+    padding: 8px 20px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.has-submenu .submenu li a:hover {
+    background-color: #f0f4ff;
+    color: #e40008;
+}
+
+.fa.fa-chevron-down {
+    font-size: 10px;
+}
+
+/* Línea animada */
 .main-menu a::after {
     content: '';
     position: absolute;
@@ -140,21 +207,84 @@ body {
     width: 0;
     height: 2px;
     background: #e40008;
-    transition: width 0.3s;
+    transition: width 0.3s ease;
 }
 
-.main-menu a:hover::after,
-.main-menu a.active::after {
+.main-menu a:hover::after {
     width: 100%;
 }
 
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 992px) {
+
+    .main-menu {
+        display: none;
+        width: 100%;
+        order: 3;
+        padding-right: 0;
+        padding-left: 0;
+        justify-content: flex-start;
+    }
+
+    .main-menu.active {
+        display: flex;
+    }
+
+    .main-menu ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .main-menu li {
+        width: 100%;
+    }
+
+    .main-menu a {
+        display: block;
+        padding: 15px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 16px;
+        white-space: normal;
+        text-align: left;
+        width: 100%;
+    }
+
+    /* Submenú MOBILE - oculto por defecto */
+    .has-submenu .submenu {
+        display: none;
+        position: static;
+        box-shadow: none;
+        border-top: none;
+        border-left: 3px solid #092179;
+        margin-left: 20px;
+        flex-direction: column;
+        z-index: auto;
+    }
+
+    /* Submenú MOBILE - visible con .active */
+    .has-submenu.active .submenu {
+        display: flex;
+        width: 100%;
+    }
+
+    .has-submenu.active .submenu li {
+        width: 100%;
+    }
+
+    /* Quitar línea animada en mobile */s
+    .main-menu a::after {
+        display: none;
+    }
+}
 /* ===== HERO BANNER CON IMAGEN DE FONDO ===== */
 .hero-banner {
     padding: 150px 0 120px;
     background-image: linear-gradient(
         rgba(228, 0, 8, 0.85),
         rgba(194, 0, 7, 0.85)
-    ), url('../images/banner1.jpg');
+    ), url('../images/cerco.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
