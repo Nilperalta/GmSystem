@@ -306,26 +306,6 @@ function isValidEmail(email) {
 }
 
 
-// ===== BOTON OCULTAR ELEMENTOS EN PROYECTO =====
-
-function mostrarGaleria(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    const galeria = document.getElementById('gallery');
-    const boton = event.target;
-    
-    if (galeria.style.display === 'none' || galeria.style.display === '') {
-        galeria.style.display = 'block';
-        galeria.scrollIntoView({ behavior: 'smooth' });
-        boton.textContent = 'Ocultar Proyectos';
-    } else {
-        const scrollPos = window.scrollY; // Guarda posición actual
-        galeria.style.display = 'none';
-        boton.textContent = 'Ver Más Proyectos';
-        window.scrollTo({ top: scrollPos }); // Mantiene la posición
-    }
-}
 
 
 // Submenú táctil en móvil
@@ -337,3 +317,52 @@ document.querySelectorAll('.has-submenu > a').forEach(link => {
         }
     });
 });
+
+
+
+// ===== CARRUSEL CLIENTES =====
+const itemCarrusel = document.querySelector('.item-carrusel');
+const imagenes = document.querySelectorAll('.item-carrusel img');
+const btnPrev = document.querySelector('.carrusel-btn.prev');
+const btnNext = document.querySelector('.carrusel-btn.next');
+
+
+const imagenesPorPagina = 6; // cuántas imágenes se ven a la vez
+let indice = 0;              // en qué imagen estamos parados
+
+function mostrarImagenes() {
+    imagenes.forEach((img, i) => {
+        // ocultar todas
+        img.style.display = 'none';
+        
+        // mostrar solo las del grupo actual
+        if (i >= indice && i < indice + imagenesPorPagina) {
+            img.style.display = 'block';
+        }
+    });
+}
+
+btnNext.addEventListener('click', function() {
+    indice += imagenesPorPagina;
+    
+    // si pasamos el final, volver al inicio
+    if (indice >= imagenes.length) {
+        indice = 0;
+    }
+    
+    mostrarImagenes();
+});
+
+btnPrev.addEventListener('click', function() {
+    indice -= imagenesPorPagina;
+    
+    // si pasamos el inicio, ir al final
+    if (indice < 0) {
+        indice = imagenes.length - imagenesPorPagina;
+    }
+    
+    mostrarImagenes();
+});
+
+// mostrar el primer grupo al cargar
+mostrarImagenes();

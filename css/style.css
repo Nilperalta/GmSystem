@@ -383,6 +383,7 @@ section {
     font-size: 39px;
     margin-bottom: 60px;
     position: relative;
+    text-transform: capitalize;
 }
 
 .section-title::after {
@@ -405,6 +406,10 @@ section {
 }
 
 .service-card {
+    /*border: 2px solid green;*/
+    display: flex;              
+    flex-direction: column;     
+    align-items: center; 
     background: white;
     border-radius: 10px;
     padding: 30px;
@@ -419,7 +424,6 @@ section {
 }
 
 .service-icon {
-    border: 2px solid yellow;
     width: 130px;
     height: 130px;
     margin: 0 auto 20px;
@@ -441,9 +445,29 @@ section {
 }
 
 .service-card p {
+    /*border: 2px solid blue;*/
+    margin-bottom: 10px;
     color: #666;
     font-size: 15px;
     line-height: 1.8;
+}
+
+.service-card a{
+    /*border: 2px solid blue;*/
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #e40008;
+    border-radius: 20px;
+    padding: 5px 25px;
+    margin-top: auto;       
+    border: none;
+    cursor: pointer;
+}
+
+
+.service-card a:hover{
+    background: #c40007;
 }
 
 /* ===== NOSOTROS ===== */
@@ -491,6 +515,66 @@ section {
     color: #555;
     font-size: 16px;
     line-height: 1.9;
+}
+
+
+/* ===== ¿POR QUÉ ELEGIRNOS? ===== */
+.choose-section{
+    /*border: 2px solid blue;*/
+}
+
+.choose-section .container{
+    /*border: 2px solid yellow;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.choose-grid{
+     /*border: 2rem solid pink;*/
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 15px;
+}
+
+.choose-grid .card{
+    /*border: 2px solid green;*/
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.choose-grid .card .choose-icon{
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+    border-radius: 10%;
+    overflow: hidden;
+    border: 3px solid #f0f0f0;
+}
+
+.choose-grid .card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.choose-grid .card h3{
+    color: #092179;
+    margin-bottom: 15px;
+    font-size: 23px;
+}
+
+.choose-grid .card p{
+    /*border: 1px solid red;*/
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-top: auto;
 }
 
 /* ===== EQUIPO ===== */
@@ -677,13 +761,19 @@ section {
 }
 
 .safety-content {
+    /*border: 2px solid yellow;*/
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
 }
 
+.safety-text{
+    /*border: 2px solid blue;*/
+}
+
 .safety-text .section-title {
+    /*border: 2px solid red;*/
     text-align: left;
     margin-bottom: 40px;
 }
@@ -701,6 +791,7 @@ section {
 }
 
 .safety-items {
+    /*border: 2px solid green;*/
     display: grid;
     gap: 25px;
     margin-top: 20px;
@@ -742,64 +833,6 @@ section {
     line-height: 1.7;
 }
 
-/* ===== GALERÍA ===== */
-
-.gallery-section{
-    /*border: 3px solid red;*/
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    cursor: pointer;
-    height: 300px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    padding: 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s;
-}
-
-.gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
-}
-
-.gallery-caption {
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-}
 
 /* ===== NUESTROS SERVICIO DE ATENCIÓN ===== */
 
@@ -852,8 +885,6 @@ section {
     margin-bottom: 25px;
     line-height: 1.7;
 }
-
-
 
 
 .btn-whatsapp {
@@ -911,6 +942,65 @@ section {
     border-radius: 0;
     box-shadow: none;
 }
+
+/* ===== NUESTROS CLIENTES ===== */
+
+.clientes{
+    border: 2px solid red;
+}
+
+.clientes .container{
+    /*border: 2px solid yellow;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.carrusel-container{
+    /*border: 2px solid black;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.item-carrusel{
+    /*border: 2px solid red;*/
+    display: flex;
+}
+
+.item-carrusel img{
+    height: 50px;
+    width: 10%;
+}
+
+.carrusel-btn {
+    border: none;
+    background: #b0b0b0;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carrusel-btn.prev {
+    border: 2px solid red;
+    margin-right: 5%;
+    color: white;
+}
+
+.carrusel-btn.next {
+    margin-left: 5%;
+    color: white;
+    
+}
+
+/* El ícono dentro del botón */
+.carrusel-btn i {
+    font-size: 18x;
+}
+
 
 /* ===== FOOTER ESTILOS ===== */
 footer {
