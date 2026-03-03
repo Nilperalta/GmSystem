@@ -419,8 +419,9 @@ section {
 }
 
 .service-icon {
-    width: 100px;
-    height: 100px;
+    border: 2px solid yellow;
+    width: 130px;
+    height: 130px;
     margin: 0 auto 20px;
     border-radius: 50%;
     overflow: hidden;
@@ -451,15 +452,16 @@ section {
 }
 
 .about-content {
-    border: 3px solid red;
+    /*border: 3px solid red;*/
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
     align-items: center;
     margin-bottom: 60px;
+    padding: 0 30px;
 }
 
-.about-content.reverse {
+.about-content .reverse {
     direction: rtl;
 }
 
@@ -587,6 +589,7 @@ section {
 }
 
 .project-card {
+    /*border: 3px solid yellow;*/
     background: white;
     border-radius: 10px;
     overflow: hidden;
@@ -806,7 +809,6 @@ section {
 }
 
 .contact-info-grid {
-    /*border: 3px solid red;*/
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
@@ -814,6 +816,7 @@ section {
 }
 
 .contact-card {
+    /*border: 3px solid red;*/
     background: white;
     border-radius: 10px;
     padding: 40px 30px;
@@ -830,7 +833,7 @@ section {
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-.contact-card i {
+.contact-card > i{
     /*border: 3px solid yellow;*/
     font-size: 53px;
     color: #092179;
@@ -850,10 +853,11 @@ section {
     line-height: 1.7;
 }
 
+
+
+
 .btn-whatsapp {
-    /*border: 3px solid red;*/
     display: inline-flex;
-    display: inline-block;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -1333,6 +1337,11 @@ footer {
         text-align: center;
     }
 
+    .about-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
 
     /*contacto*/
     .contact-info-grid {
@@ -1431,8 +1440,15 @@ footer {
     .contact-card p { 
         font-size: 13px; margin-bottom: 20px; 
     }
+
+    /*Boton*/
     .btn-whatsapp { 
-        padding: 12px 24px; font-size: 13px; 
+        padding: 0px 24px; font-size: 13px; 
+    }
+
+    .btn-whatsapp i{
+        font-size: 13px;
+        margin-top: 18px;
     }
 
     .footer { 
@@ -1507,10 +1523,12 @@ html, body {
 
 /* Estilos para el botón primary que estaba faltando */
 .btn-primary {
+    /*border: 3px solid yellow;*/
     display: inline-block;
     background: #e40008;
     color: white;
     padding: 15px 30px;
+    margin-top: 40px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: 600;
